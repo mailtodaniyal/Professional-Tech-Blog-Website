@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataTech Insights - Professional Data Technology Consulting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0066FF;
+            --primary-dark: #0052CC;
+            --secondary: #6C5CE7;
+            --accent: #00D9FF;
+            --dark: #0F1419;
+            --dark-light: #1A1F2E;
+            --gray: #8B949E;
+            --gray-light: #F6F8FA;
+            --white: #FFFFFF;
+            --gradient-1: linear-gradient(135deg, #0066FF 0%, #00D9FF 100%);
+            --gradient-2: linear-gradient(135deg, #6C5CE7 0%, #A29BFE 100%);
+            --gradient-3: linear-gradient(135deg, #0F1419 0%, #1A1F2E 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: var(--white);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 4px 14px rgba(0, 102, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--dark);
+            border: 2px solid var(--dark);
+        }
+
+        .btn-outline:hover {
+            background: var(--dark);
+            color: white;
+        }
+
+        .hero {
+            padding: 140px 0 100px;
+            background: linear-gradient(180deg, #F6F8FA 0%, #FFFFFF 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0, 102, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-text p {
+            font-size: 20px;
+            color: var(--gray);
+            margin-bottom: 40px;
+            line-height: 1.7;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .hero-image {
+            position: relative;
+            animation: fadeInRight 1s ease 0.3s both;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-img-wrapper {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            background: var(--gradient-1);
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .hero-img-content {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .hero-img-content i {
+            font-size: 120px;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .hero-img-content h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .hero-img-content p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating-card-1 {
+            top: 20px;
+            right: -30px;
+            animation-delay: 0s;
+        }
+
+        .floating-card-2 {
+            bottom: 40px;
+            left: -30px;
+            animation-delay: 1s;
+        }
+
+        .stats-section {
+            background: var(--gradient-3);
+            color: white;
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 60px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-item p {
+            font-size: 16px;
+            color: var(--gray);
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .section-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--dark);
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .insight-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .insight-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .insight-image {
+            width: 100%;
+            height: 220px;
+            background: var(--gradient-1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .insight-image i {
+            font-size: 80px;
+            opacity: 0.9;
+        }
+
+        .insight-content {
+            padding: 28px;
+        }
+
+        .insight-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+
+        .insight-category {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .insight-date {
+            color: var(--gray);
+        }
+
+        .insight-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            color: var(--dark);
+        }
+
+        .insight-excerpt {
+            color: var(--gray);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .insight-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-top: 20px;
+            border-top: 1px solid #E5E7EB;
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .author-info {
+            flex: 1;
+        }
+
+        .author-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--dark);
+        }
+
+        .author-role {
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 28px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 36px 28px;
+            border-radius: 16px;
+            border: 2px solid #E5E7EB;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 102, 255, 0.15);
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 24px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:nth-child(1) .service-icon {
+            background: rgba(0, 102, 255, 0.1);
+            color: var(--primary);
+        }
+
+        .service-card:nth-child(2) .service-icon {
+            background: rgba(108, 92, 231, 0.1);
+            color: var(--secondary);
+        }
+
+        .service-card:nth-child(3) .service-icon {
+            background: rgba(0, 217, 255, 0.1);
+            color: var(--accent);
+        }
+
+        .service-card:nth-child(4) .service-icon {
+            background: rgba(255, 107, 107, 0.1);
+            color: #FF6B6B;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .service-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+
+        .service-description {
+            color: var(--gray);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .service-link {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 15px;
+            transition: gap 0.3s ease;
+        }
+
+        .service-link:hover {
+            gap: 10px;
+        }
+
+        .vendors-section {
+            background: var(--gray-light);
+        }
+
+        .vendors-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .vendor-card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .vendor-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .vendor-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .vendor-logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .vendor-info h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .vendor-category {
+            font-size: 14px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .vendor-description {
+            color: var(--gray);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .vendor-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(0, 102, 255, 0.1);
+            color: var(--primary);
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .vendor-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 15px;
+            transition: gap 0.3s ease;
+        }
+
+        .vendor-link:hover {
+            gap: 12px;
+        }
+
+        .members-section {
+            background: var(--gradient-3);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .members-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .members-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .members-text h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .members-text p {
+            font-size: 18px;
+            color: var(--gray);
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .members-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .feature-item {
+            text-align: center;
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 16px;
+            background: rgba(0, 102, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .feature-item h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .feature-item p {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        .newsletter-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 6s ease-in-out infinite;
+        }
+
+        .newsletter-content {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter-content h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .newsletter-content p {
+            font-size: 18px;
+            margin-bottom: 36px;
+            opacity: 0.9;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 16px 24px;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .newsletter-form button {
+            padding: 16px 32px;
+            background: white;
+            color: var(--primary);
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .testimonials-section {
+            background: var(--gray-light);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 36px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            position: relative;
+        }
+
+        .quote-icon {
+            font-size: 48px;
+            color: var(--primary);
+            opacity: 0.2;
+            margin-bottom: 16px;
+        }
+
+        .testimonial-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--gray);
+            margin-bottom: 24px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .testimonial-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--gradient-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .testimonial-name {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 2px;
+        }
+
+        .testimonial-position {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--dark-light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-column h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 15px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid var(--dark-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-bottom-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        @media (max-width: 1024px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .hero-text h1 {
+                font-size: 48px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+
+            .insights-grid,
+            .vendors-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .members-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 36px;
+            }
+
+            .section-header h2 {
+                font-size: 36px;
+            }
+
+            .stats-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-20px); }
+            60% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        .ad-banner {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FFE66D 100%);
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 40px 0;
+            color: var(--dark);
+        }
+
+        .ad-banner h4 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .ad-banner p {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <div class="logo-icon">D</div>
+                    <span>DataTech Insights</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#vendors">Vendors</a></li>
+                    <li><a href="#members">Members Area</a></li>
+                </ul>
+                <div class="nav-cta">
+                    <a href="#" class="btn btn-outline">Login</a>
+                    <a href="#" class="btn btn-primary">Get Started</a>
+                </div>
+                <button class="mobile-menu-btn">☰</button>
+            </nav>
+        </div>
+    </header>
+
+    <section  class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Unlock the Power of Data Technology</h1>
+                    <p>Professional insights, world-class consulting, and comprehensive training for data professionals worldwide. Transform your data strategy with expert guidance.</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-primary">Explore Insights</a>
+                        <a href="#" class="btn btn-outline">Book Consultation</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div style="background-image: url(hero.jpg); background-size: cover;" class="hero-img-wrapper">
+                        <div class="hero-img-content">
+                            <i class="fas fa-chart-network"></i>
+                            <!-- <h3>Data Intelligence Platform</h3>
+                            <p>Advanced analytics for modern enterprises</p> -->
+                        </div>
+                    </div>
+                    <div class="floating-card floating-card-1">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #0066FF, #00D9FF); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white;">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <div>
+                                <div style="font-weight: 700; font-size: 14px;">Cloud Architecture</div>
+                                <div style="font-size: 12px; color: #8B949E;">Latest Insights</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="floating-card floating-card-2">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #6C5CE7, #A29BFE); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white;">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div>
+                                <div style="font-weight: 700; font-size: 14px;">15,000+</div>
+                                <div style="font-size: 12px; color: #8B949E;">Professionals</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>15,000+</h3>
+                    <p>Data Professionals</p>
+                </div>
+                <div class="stat-item">
+                    <h3>500+</h3>
+                    <p>Expert Articles</p>
+                </div>
+                <div class="stat-item">
+                    <h3>50+</h3>
+                    <p>Training Programs</p>
+                </div>
+                <div class="stat-item">
+                    <h3>98%</h3>
+                    <p>Client Satisfaction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="blog">
+        <div class="container">
+            <div class="section-header">
+                <h2>Latest Data Insights</h2>
+                <p>Stay ahead with cutting-edge analysis, industry trends, and practical solutions from our expert team</p>
+            </div>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <div class="insight-image">
+                        <img style="background-size: cover; height: 16pc;" src="services.jpg" alt="">
+                        <!-- <i class="fas fa-brain"></i> -->
+                    </div>
+                    <div class="insight-content">
+                        <div class="insight-meta">
+                            <span class="insight-category">Machine Learning</span>
+                            <span class="insight-date">5 min read</span>
+                        </div>
+                        <h3 class="insight-title">Advanced ML Algorithms Transforming Enterprise Data</h3>
+                        <p class="insight-excerpt">Discover how cutting-edge machine learning techniques are revolutionizing business intelligence and predictive analytics.</p>
+                        <div class="insight-author">
+                            <div class="author-avatar">SC</div>
+                            <div class="author-info">
+                                <div class="author-name">Dr. Sarah Chen</div>
+                                <div class="author-role">ML Research Lead</div>
+                            </div>
+                            <a href="#" class="service-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-image" style="background: var(--gradient-2);">
+                        <img style="background-size: cover; height: 16pc;" src="services 2.jpg" alt="">
+                        <!-- <i class="fas fa-cloud-upload-alt"></i> -->
+                    </div>
+                    <div class="insight-content">
+                        <div class="insight-meta">
+                            <span class="insight-category">Cloud Architecture</span>
+                            <span class="insight-date">8 min read</span>
+                        </div>
+                        <h3 class="insight-title">Building Scalable Data Pipelines in Multi-Cloud Environments</h3>
+                        <p class="insight-excerpt">Learn best practices for designing resilient data architectures that span multiple cloud providers seamlessly.</p>
+                        <div class="insight-author">
+                            <div class="author-avatar" style="background: linear-gradient(135deg, #FF6B6B, #FFE66D);">MR</div>
+                            <div class="author-info">
+                                <div class="author-name">Michael Rodriguez</div>
+                                <div class="author-role">Cloud Architect</div>
+                            </div>
+                            <a href="#" class="service-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-image" style="background: linear-gradient(135deg, #00D9FF, #0066FF);">
+                        <img style="background-size: cover; height: 16pc;" src="services 3.webp" alt="">
+                        <!-- <i class="fas fa-shield-alt"></i> -->
+                    </div>
+                    <div class="insight-content">
+                        <div class="insight-meta">
+                            <span class="insight-category">Data Security</span>
+                            <span class="insight-date">6 min read</span>
+                        </div>
+                        <h3 class="insight-title">Zero-Trust Data Governance: Protecting Enterprise Information</h3>
+                        <p class="insight-excerpt">Implement comprehensive security strategies that ensure compliance while enabling business agility.</p>
+                        <div class="insight-author">
+                            <div class="author-avatar" style="background: linear-gradient(135deg, #00D9FF, #0066FF);">JP</div>
+                            <div class="author-info">
+                                <div class="author-name">Jennifer Park</div>
+                                <div class="author-role">Security Specialist</div>
+                            </div>
+                            <a href="#" class="service-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 48px;">
+                <a href="#" class="btn btn-primary">View All Insights</a>
+            </div>
+
+            <div class="ad-banner">
+                <h4><i class="fas fa-star"></i> Featured Partner: DataCloud Solutions</h4>
+                <p>Enterprise-grade cloud infrastructure for modern data teams. Get 30 days free trial.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Services</h2>
+                <p>Comprehensive data technology solutions tailored for modern enterprises</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="service-title">Technology Consulting</h3>
+                    <p class="service-description">Strategic guidance for data architecture, platform selection, and digital transformation initiatives.</p>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="service-title">Data Training</h3>
+                    <p class="service-description">Comprehensive programs for teams and individuals to master modern data technologies.</p>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3 class="service-title">Events & Workshops</h3>
+                    <p class="service-description">Worldwide conferences and hands-on workshops connecting data professionals globally.</p>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="service-title">Custom Solutions</h3>
+                    <p class="service-description">Tailored data strategies designed specifically for your business challenges.</p>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section vendors-section" id="vendors">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Vendors & Products</h2>
+                <p>Discover leading data technology solutions from our trusted partner ecosystem</p>
+            </div>
+            <div class="vendors-grid">
+                <div class="vendor-card">
+                    <div class="vendor-header">
+                        <div class="vendor-logo">CP</div>
+                        <div class="vendor-info">
+                            <h3>CloudData Pro</h3>
+                            <span class="vendor-category">Cloud Analytics Platform</span>
+                        </div>
+                    </div>
+                    <span class="vendor-badge">Featured Product</span>
+                    <p class="vendor-description">Next-generation analytics platform with real-time processing capabilities and AI-powered insights.</p>
+                    <a href="#" class="vendor-link">View Details <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="vendor-card">
+                    <div class="vendor-header">
+                        <div class="vendor-logo" style="background: linear-gradient(135deg, #6C5CE7, #A29BFE);">DS</div>
+                        <div class="vendor-info">
+                            <h3>DataVault Systems</h3>
+                            <span class="vendor-category">Data Management Suite</span>
+                        </div>
+                    </div>
+                    <span class="vendor-badge" style="background: rgba(108, 92, 231, 0.1); color: #6C5CE7;">Top Rated</span>
+                    <p class="vendor-description">Enterprise-grade data governance platform with built-in security, compliance, and catalog features.</p>
+                    <a href="#" class="vendor-link">View Details <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="vendor-card">
+                    <div class="vendor-header">
+                        <div class="vendor-logo" style="background: linear-gradient(135deg, #00D9FF, #0066FF);">AH</div>
+                        <div class="vendor-info">
+                            <h3>AI Analytics Hub</h3>
+                            <span class="vendor-category">Machine Learning Tools</span>
+                        </div>
+                    </div>
+                    <span class="vendor-badge" style="background: rgba(0, 217, 255, 0.1); color: #00D9FF;">New Release</span>
+                    <p class="vendor-description">Cutting-edge ML platform enabling data scientists to build and deploy models at scale.</p>
+                    <a href="#" class="vendor-link">View Details <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 48px;">
+                <a href="#" class="btn btn-primary">View All Vendors</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="members-section" id="members">
+        <div class="container">
+            <div class="members-content">
+                <div class="members-text">
+                    <h2>Join Our Expert Network</h2>
+                    <p>Connect with global data professionals, share your expertise, and grow your consulting practice</p>
+                    <div style="margin-bottom: 32px;">
+                        <a href="#" class="btn btn-primary">Register as Consultant</a>
+                    </div>
+                </div>
+                <div class="members-features">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-globe-americas"></i>
+                        </div>
+                        <h4>Global Network</h4>
+                        <p>Connect with 15,000+ data professionals worldwide</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h4>Premium Projects</h4>
+                        <p>Access exclusive high-value consulting opportunities</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>Career Growth</h4>
+                        <p>Advance your expertise with continuous learning</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Clients Say</h2>
+                <p>Trusted by leading organizations worldwide</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="quote-icon">"</div>
+                    <p class="testimonial-text">DataTech Insights transformed our entire data strategy. Their expertise in cloud architecture helped us reduce costs by 40% while improving performance.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">JM</div>
+                        <div>
+                            <div class="testimonial-name">James Mitchell</div>
+                            <div class="testimonial-position">CTO, TechCorp Global</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote-icon">"</div>
+                    <p class="testimonial-text">The training programs are world-class. Our team gained practical skills that we immediately applied to real projects. Highly recommended!</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar" style="background: linear-gradient(135deg, #FF6B6B, #FFE66D);">EZ</div>
+                        <div>
+                            <div class="testimonial-name">Emily Zhang</div>
+                            <div class="testimonial-position">Data Director, FinanceHub</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote-icon">"</div>
+                    <p class="testimonial-text">Outstanding consultants who truly understand enterprise data challenges. They delivered beyond our expectations on every project.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar" style="background: linear-gradient(135deg, #00D9FF, #0066FF);">RA</div>
+                        <div>
+                            <div class="testimonial-name">Robert Anderson</div>
+                            <div class="testimonial-position">VP Engineering, CloudScale</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Stay Ahead of Data Trends</h2>
+                <p>Get weekly insights, industry updates, and exclusive content delivered to your inbox</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+                <p style="font-size: 14px; margin-top: 16px; opacity: 0.8;">Join 75,000+ data professionals. Unsubscribe anytime.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>DataTech Insights</h3>
+                    <p>Empowering data professionals worldwide with expert consulting, training, and cutting-edge insights.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Technology Consulting</a></li>
+                        <li><a href="#">Data Training</a></li>
+                        <li><a href="#">Events & Workshops</a></li>
+                        <li><a href="#">Custom Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Blog & Insights</a></li>
+                        <li><a href="#">Vendor Directory</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Whitepapers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Partners</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:hello@datatechinsights.com">hello@datatechinsights.com</a></li>
+                        <li><a href="tel:+15555551234">+1 (555) 555-1234</a></li>
+                        <li>123 Data Street<br>New York, NY 10001</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 DataTech Insights. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.insight-card, .service-card, .vendor-card, .testimonial-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        document.querySelector('.newsletter-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const input = e.target.querySelector('input');
+            alert(`Thank you for subscribing with ${input.value}!`);
+            input.value = '';
+        });
+
+        const statItems = document.querySelectorAll('.stat-item h3');
+        const animateStats = () => {
+            statItems.forEach(stat => {
+                const target = parseInt(stat.textContent.replace(/\D/g, ''));
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    stat.textContent = stat.textContent.includes('%') 
+                        ? Math.round(current) + '%' 
+                        : Math.round(current).toLocaleString() + '+';
+                }, 30);
+            });
+        };
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) statsObserver.observe(statsSection);
+    </script>
+</body>
+</html>
